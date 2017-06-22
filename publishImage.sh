@@ -16,6 +16,9 @@ else
   echo "$property_file not found!"
 fi
 
-echo "Building docker image ${user}/${image_name}"
-docker build -f docker/Dockerfile -t ${user}/${image_name} .
-echo "Generated docker image: " ${user}/${image_name}
+echo "Publishing image to Docker Hub: "${user}/${image_name}
+
+echo "login wih user:" ${user}
+docker login -u ${user}
+
+docker push ${user}/${image_name}
