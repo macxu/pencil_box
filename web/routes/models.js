@@ -12,12 +12,12 @@ router.get('/:name?', function(req, res, next) {
         modelName = "";
     }
 
-    var backendServiceIp = process.env['BACKEND_PORT_9900_TCP_ADDR'];
-    if (!backendServiceIp) {
-        backendServiceIp = 'localhost'
-    }
+    // var backendServiceIp = process.env['BACKEND_PORT_9900_TCP_ADDR'];
+    // if (!backendServiceIp) {
+    //     backendServiceIp = 'localhost'
+    // }
 
-    var requestUrl = 'http://' + backendServiceIp + ':9900/api/models/' + modelName;
+    var requestUrl = 'http://' + "api" + ':9900/api/models/' + modelName;
     console.log("request url: " + requestUrl);
     request(requestUrl, function (error, response, body) {
         res.json(body);

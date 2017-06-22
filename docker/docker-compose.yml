@@ -1,0 +1,8 @@
+version: '3'
+services:
+  web:
+    image: "macxxn/pencil_box"
+    ports:
+     - "9999:9999"
+  api:
+    image: "macxxn/pencil_box_api"
