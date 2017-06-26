@@ -3,8 +3,10 @@ services:
   web:
     image: "macxxn/pencil_box"
     ports:
-     - "9999:9999"
+     - "9999:80"
   api:
     image: "macxxn/pencil_box_api"
+    ports:
+         - "9900:9900"
     volumes:
          - ~/practical_docker/pencil_box_models:/website/web/dataModels
