@@ -1,5 +1,8 @@
 FROM node
 
+ENV API_SERVER api_server
+ENV API_SERVER_PORT 9900
+
 RUN mkdir /website
 WORKDIR /website
 

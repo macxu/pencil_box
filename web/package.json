@@ -13,7 +13,8 @@
     "morgan": "*",
     "cookie-parser": "*",
     "pug": "*",
-    "process": "*"
+    "process": "*",
+    "cors": "*"
 
   }
 }

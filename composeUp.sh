@@ -1,5 +1,3 @@
-#!/bin/bash  
-
-sh ./buildImage.sh
+#!/bin/bash
 
 docker-compose -f ./docker/docker-compose.yml up

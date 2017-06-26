@@ -6,3 +6,5 @@ services:
      - "9999:9999"
   api:
     image: "macxxn/pencil_box_api"
+    volumes:
+         - ~/practical_docker/pencil_box_models:/website/web/dataModels
