@@ -28,4 +28,4 @@ docker rm -f ${container_name}
 echo ""
 echo "Run in container: http://localhost:"${host_bind_port}
 
-docker run -p ${host_bind_port}:${container_port} --link ${link_container_name}:${link_container_alias} --name ${container_name} -t ${user}/${image_name}
+docker run -p ${host_bind_port}:${container_port} --name ${container_name} -t ${user}/${image_name}
