@@ -1,16 +1,5 @@
-FROM node
+FROM nginx
 
-ENV API_SERVER api_server
-ENV API_SERVER_PORT 9900
+ADD ./web /usr/share/nginx/html
 
-RUN mkdir /website
-WORKDIR /website
-
-ADD . /website/
-
-WORKDIR /website/web
-RUN npm install
-
-WORKDIR /website/web/bin
-
-ENTRYPOINT ["node", "www"]
+CMD ["bash"]

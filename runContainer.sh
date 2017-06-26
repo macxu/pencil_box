@@ -16,7 +16,7 @@ else
   echo "$property_file not found!"
 fi
 
-# above code is to get the properties from the proerty file
+# above code is to get the properties from the property file
 
 echo "running containers:"
 docker ps
@@ -28,4 +28,4 @@ docker rm -f ${container_name}
 echo ""
 echo "Run in container: http://localhost:"${host_bind_port}
 
-docker run -d -p ${host_bind_port}:${container_port} --link ${link_container_name}:${link_container_alias} --name ${container_name} -t ${user}/${image_name}
+docker run -p ${host_bind_port}:${container_port} --link ${link_container_name}:${link_container_alias} --name ${container_name} -t ${user}/${image_name}
