@@ -688,7 +688,6 @@ pre code {
 .container:after {
   content: " ";
   display: table;
-  height: 1200px;
 }
 .container:after {
   clear: both;

@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Practical Docker</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- MetisMenu CSS -->
+    <link href="vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="dist/css/sb-admin-2.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+<div id="wrapper">
+
+    <div id="page-wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">Practical Docker</h1>
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <!-- /.row -->
+        <div class="row">
+            <div class="col-lg-10">
+                <div class="panel panel-default">
+                    <!-- /.panel-heading -->
+                    <div class="panel-body">
+                        <div class="row">
+
+                            <div class="col-lg-3">
+                                <input class="form-control" id="txt_model" placeholder="specify a model name" value="">
+                            </div>
+
+                            <div class="col-lg-3">
+                                <button type="button" id="btn_get_model" class="btn btn-primary">Get Model</button>
+                            </div>
+
+                        </div>
+                        <br>
+
+                        <div class="row">
+
+                            <div class="col-lg-12">
+                                <input class="form-control" id="txt_api_response">
+                            </div>
+                            <!--<textarea id="txt_api_response" class="form-control" rows="1"></textarea>-->
+
+                        </div>
+                        <br>
+
+                        <div class="row">
+
+                            <div class="col-lg-12">
+                                <div id="divCanvas">
+                                    <canvas id="myCanvas" width="800" height="800" style="border:1px solid #000000;"></canvas>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <!-- /.panel-body -->
+                </div>
+                <!-- /.panel -->
+            </div>
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /#page-wrapper -->
+
+</div>
+<!-- /#wrapper -->
+
+<!-- jQuery -->
+<script src="vendor/jquery/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+
+<!-- Metis Menu Plugin JavaScript -->
+<script src="vendor/metisMenu/metisMenu.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="dist/js/sb-admin-2.js"></script>
+
+<script>
+    $(document).ready(function(){
+        $("#btn_get_model").click(function(){
+            var modelName = $("#txt_model").val();
+
+            $("#txt_api_response").val("");
+
+            $.get("http://localhost:9900/api/models/" + modelName, function(model, status) {
+
+                $("#txt_api_response").val(JSON.stringify(model));
+                drawModel(model);
+
+            }).fail(function(err, err1, err2) {
+
+                $("#txt_api_response").val("Failed in getting data from backend service!");
+
+                var canvas = document.getElementById('myCanvas');
+                var context = canvas.getContext('2d');
+
+                context.clearRect(0, 0, canvas.width, canvas.height);
+            });
+
+        });
+    });
+</script>
+
+<script>
+    function drawModel(model) {
+
+        var canvas = document.getElementById('myCanvas');
+        var context = canvas.getContext('2d');
+        context.strokeStyle = 'black';
+        context.lineWidth = 2;
+
+        context.clearRect(0, 0, canvas.width, canvas.height);
+
+        var centerOffset = 100;
+        var coordinates = model['coordinates'];
+
+        context.beginPath();
+        var startingPoint = coordinates[0];
+        context.moveTo(startingPoint[0] + centerOffset, startingPoint[1] + centerOffset);
+
+        for ( var i = 1; i < coordinates.length; i++ ) {
+
+            var nextPoint = coordinates[i];
+            context.lineTo(nextPoint[0] + centerOffset, nextPoint[1] + centerOffset);
+        }
+
+        context.lineTo(startingPoint[0] + centerOffset, startingPoint[1] + centerOffset);
+
+        context.stroke();
+    }
+</script>
+
+</body>
+
+</html>
