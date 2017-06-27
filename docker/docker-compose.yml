@@ -3,7 +3,7 @@ services:
   web:
     image: "macxxn/pencilbox"
     ports:
-     - "9999:80"
+     - "9527:80"
   api:
     image: "macxxn/pencilbox_api"
     ports:
