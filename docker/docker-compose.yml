@@ -1,12 +1,12 @@
 version: '3'
 services:
   web:
-    image: "macxxn/pencil_box"
+    image: "macxxn/pencilbox"
     ports:
      - "9999:80"
   api:
-    image: "macxxn/pencil_box_api"
+    image: "macxxn/pencilbox_api"
     ports:
          - "9900:9900"
     volumes:
-         - ~/practical_docker/pencil_box_models:/website/web/dataModels
+         - ~/practical_docker/pencilbox_models:/website/web/dataModels
