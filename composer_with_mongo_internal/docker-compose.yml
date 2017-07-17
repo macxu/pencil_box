@@ -1,0 +1,21 @@
+version: '3'
+services:
+  web:
+    image: "macxxn/pencilbox"
+    ports:
+     - "9527:80"
+  api:
+    image: "macxxn/pencilbox_api:mongo"
+    ports:
+     - "9900:9900"
+    environment:
+     - DB_SERVER=db
+     - DB_PORT=27017
+    depends_on:
+     - 'db'
+  db:
+    image: "mongo"
+    ports:
+     - "27017"
+    volumes:
+     - "/Users/mxu/practical_docker/pencilbox_models:/data/db"
