@@ -27,7 +27,6 @@
 <script type="text/javascript" src="js/wow.js"></script>
 <script type="text/javascript" src="js/classie.js"></script>
 <script type="text/javascript" src="js/practical-docker.js"></script>
-<script src="contactform/contactform.js"></script>
 
 <script>
     $(document).ready(function(){
@@ -67,15 +66,15 @@
         context.clearRect(0, 0, canvas.width, canvas.height);
 
         var centerOffset = 100;
-        var coordinates = model['coordinates'];
+        var points = model['points'];
 
         context.beginPath();
-        var startingPoint = coordinates[0];
+        var startingPoint = points[0];
         context.moveTo(startingPoint[0] + centerOffset, startingPoint[1] + centerOffset);
 
-        for ( var i = 1; i < coordinates.length; i++ ) {
+        for ( var i = 1; i < points.length; i++ ) {
 
-            var nextPoint = coordinates[i];
+            var nextPoint = points[i];
             context.lineTo(nextPoint[0] + centerOffset, nextPoint[1] + centerOffset);
         }
 
