@@ -14,10 +14,12 @@ echo "running containers:"
 docker ps
 echo ""
 
-echo "stop and remove existing container"
+echo "stop and remove existing container below:"
 docker rm -f ${CONTAINER_NAME}
 
 echo ""
-echo "Run in container at port "${HOST_BIND_PORT}
+echo "port mapping:"
+echo "host:container = "${HOST_BIND_PORT}":"${CONTAINER_PORT}
+echo ""
 
-docker run -p ${HOST_BIND_PORT}:${CONTAINER_PORT} --name ${CONTAINER_NAME} -t ${DOCKER_USER}/${IMAGE_NAME}':'${IMAGE_TAG}
+docker run -d -p ${HOST_BIND_PORT}:${CONTAINER_PORT} --name ${CONTAINER_NAME} -t ${DOCKER_USER}/${IMAGE_NAME}':'${IMAGE_TAG}
