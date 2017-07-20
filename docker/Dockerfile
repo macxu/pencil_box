@@ -2,4 +2,4 @@ FROM nginx
 
 ADD ./web /usr/share/nginx/html
 
-EXPOSE 9527
+EXPOSE 80

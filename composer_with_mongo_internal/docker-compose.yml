@@ -3,7 +3,7 @@ services:
   web:
     image: "macxxn/pencilbox"
     ports:
-     - "9527:80"
+     - "9988:80"
   api:
     image: "macxxn/pencilbox_api:mongo"
     ports:

@@ -1,31 +1,23 @@
 #!/bin/bash  
 
-property_file="./docker/docker.properties"
+#####  APP specific variables  #######
+DOCKER_USER=macxxn
+IMAGE_NAME=pencilbox
+IMAGE_TAG=latest
 
-if [ -f "$property_file" ]
-then
-
-  while IFS='=' read -r key value
-  do
-    key=$(echo $key | tr '.' '_')
-    eval "${key}='${value}'"
-
-  done < "$property_file"
-
-else
-  echo "$property_file not found!"
-fi
-
-# above code is to get the properties from the property file
+CONTAINER_NAME=pencilbox
+CONTAINER_PORT=80
+HOST_BIND_PORT=9988
+######################################
 
 echo "running containers:"
 docker ps
 echo ""
 
 echo "stop and remove existing container"
-docker rm -f ${container_name}
+docker rm -f ${CONTAINER_NAME}
 
 echo ""
-echo "Run in container: http://localhost:"${host_bind_port}
+echo "Run in container at port "${HOST_BIND_PORT}
 
-docker run -p ${host_bind_port}:${container_port} --name ${container_name} -t ${user}/${image_name}
+docker run -p ${HOST_BIND_PORT}:${CONTAINER_PORT} --name ${CONTAINER_NAME} -t ${DOCKER_USER}/${IMAGE_NAME}':'${IMAGE_TAG}

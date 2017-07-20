@@ -1,24 +1,14 @@
 #!/bin/bash
 
-property_file="./docker/docker.properties"
+#####  APP specific variables  #######
+DOCKER_USER=macxxn
+IMAGE_NAME=pencilbox
+IMAGE_TAG=latest
+######################################
 
-if [ -f "$property_file" ]
-then
+echo "Publishing image to Docker Hub: "${DOCKER_USER}/${IMAGE_NAME} with tag as ${IMAGE_TAG}
 
-  while IFS='=' read -r key value
-  do
-    key=$(echo $key | tr '.' '_')
-    eval "${key}='${value}'"
+echo "login wih user:" ${DOCKER_USER}
+docker login -u ${DOCKER_USER}
 
-  done < "$property_file"
-
-else
-  echo "$property_file not found!"
-fi
-
-echo "Publishing image to Docker Hub: "${user}/${image_name}
-
-echo "login wih user:" ${user}
-docker login -u ${user}
-
-docker push ${user}/${image_name}
+docker push ${DOCKER_USER}/${IMAGE_NAME}':'${IMAGE_TAG}
